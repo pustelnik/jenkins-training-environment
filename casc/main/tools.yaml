@@ -1,0 +1,16 @@
+tool:
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  maven:
+    installations:
+    - name: "maven-3.9.0"
+      properties:
+      - installSource:
+          installers:
+          - maven:
+              id: "3.9.0"
+  mavenGlobalConfig:
+    globalSettingsProvider: "standard"
+    settingsProvider: "standard"

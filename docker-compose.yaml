@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  jenkins:
+    ports:
+      - "8099:8080"
+    build: .
+    privileged: true
+    environment:
+      - CASC_JENKINS_CONFIG=/var/lib/casc
+    volumes:
+      - ./jenkins-data:/var/jenkins_home:rw
+      - ./casc:/var/lib/casc:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
