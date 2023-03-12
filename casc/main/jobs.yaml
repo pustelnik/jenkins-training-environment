@@ -1,0 +1,31 @@
+jobs:
+  - script: >
+      pipelineJob('Seed') {
+        definition {
+          cps {
+            script("""\
+              pipeline {
+                agent any
+                stages {
+                  stage('Checkout SCM') {
+                    steps {
+                      checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/pustelnik/jenkins-training-src.git']])
+                    }
+                  }
+                  stage('Load Jobs') {
+                    steps {
+                      script {
+                        def targets = '''
+                        jobs/**/*_folder.groovy
+                        jobs/**/*_job.groovy
+                        '''
+                        jobDsl removedConfigFilesAction: 'DELETE', removedJobAction: 'DISABLE', removedViewAction: 'DELETE', sandbox: false, targets: targets, unstableOnDeprecation: true
+                      }
+                    }
+                  }
+                }
+              }""".stripIndent())
+              sandbox()
+          }
+        }
+      }

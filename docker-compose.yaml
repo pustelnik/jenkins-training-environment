@@ -1,5 +1,12 @@
 version: "3.9"
 services:
+  jdk17-agent:
+    build: 
+      context: .
+      dockerfile: Dockerfile-jdk17
+      tags:
+        - jenkins-agent:jdk17
+    command: /bin/bash
   jenkins:
     ports:
       - "8099:8080"

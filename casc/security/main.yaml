@@ -5,3 +5,7 @@ jenkins:
       users:
         - id: admin
           password: training
+
+security:
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: false
